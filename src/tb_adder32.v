@@ -1,5 +1,4 @@
 `timescale 1ns / 1ps
-`include "adder32.v"
 
 module TestbenchAdder32();
     reg [31:0] operand1;

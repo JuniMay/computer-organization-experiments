@@ -1,5 +1,4 @@
 `timescale 1ns / 1ps
-`include "adder8.v"
 
 module Adder32(input [31:0] operand1,
                input [31:0] operand2,

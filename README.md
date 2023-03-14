@@ -2,8 +2,8 @@
 
 This repository contains the source code for the experiments of the Computer Organization course.
 
-Source code is placed in `src` directory.
+Source code is placed under `src` directory.
 
-The `include` in each source file may cause warning in vivado, but it is not a big problem.
+The source codes can be compiled and simulate using iverilog and gtkwave.
 
-The source codes can be compiled and run in VSCode if the environment and extensions are set properly.
+For development environment using VSCode, check [DIDE](https://github.com/Nitcloud/Digital-IDE).

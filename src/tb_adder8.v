@@ -1,5 +1,4 @@
 `timescale 1ns / 1ps
-`include "adder8.v"
 
 module TestbenchAdder8();
     reg [7:0] operand1;
