@@ -1,0 +1,16 @@
+{
+	"TOOL_CHAIN": "xilinx",
+	"PRJ_NAME": {
+		"FPGA": "template"
+	},
+	"SOC_MODE": {
+		"soc": "none"
+	},
+	"enableShowlog": false,
+	"Device": "none",
+	"PRJ_STRUCTURE": "customer",
+	"PRJ_Path": "${workspace}/vivado",
+	"HardwareData": "${workspace}/data",
+	"HardwareSim": "${workspace}/sim",
+	"HardwareSrc": "${workspace}/src"
+}

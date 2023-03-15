@@ -1,5 +1,9 @@
 build
 vivado
 prj
+reports
+
+.vscode/*
+!.vscode/property.json
 
 *.vcd
