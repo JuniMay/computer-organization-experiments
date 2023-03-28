@@ -40,7 +40,7 @@ module Multiplier32Bit (
 
   always @(posedge clk) begin
     if (mult_valid) begin
-      mult_operand1 <= {mult_operand1[62:0], 1'b0};
+      mult_operand1 <= {mult_operand1[61:0], 2'b0};
     end else if (mult_begin) begin
       mult_operand1 <= {32'b0, operand1_abs};
     end
@@ -48,13 +48,13 @@ module Multiplier32Bit (
 
   always @(posedge clk) begin
     if (mult_valid) begin
-      mult_operand2 <= {1'b0, mult_operand2[31:1]};
+      mult_operand2 <= {2'b0, mult_operand2[31:2]};
     end else if (mult_begin) begin
       mult_operand2 <= operand2_abs;
     end
   end
 
-  assign partial_product = mult_operand2[0] ? mult_operand1 : 64'b0;
+  assign partial_product = mult_operand2[1] ? (mult_operand2[0] ? mult_operand1 + {mult_operand1[63:1], 1'b0} : {mult_operand1[63:1], 1'b0}) : (mult_operand2[0] ? mult_operand1 : 64'b0);
 
   always @(posedge clk) begin
     if (mult_valid) begin

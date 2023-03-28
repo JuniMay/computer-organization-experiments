@@ -1,3 +1,5 @@
+`timescale 100ps / 1ps
+
 module TestbenchMultiplier32Bit ();
 
   reg clk;
@@ -50,8 +52,8 @@ module TestbenchMultiplier32Bit ();
 
     #500;
     mult_begin = 1;
-    operand1   = 32'h00000002;
-    operand2   = 32'h80000000;
+    operand1   = 32'h7FFFFFFF;
+    operand2   = 32'h7FFFFFFF;
     #400;
     mult_begin = 0;
 
