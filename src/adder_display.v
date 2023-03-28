@@ -14,7 +14,7 @@ module adder_display (
     // led for carry_out
     output led_cout,
 
-    // lcd, leavédefault
+    // lcd, leave default
     output lcd_rst,
     output lcd_cs,
     output lcd_rs,
