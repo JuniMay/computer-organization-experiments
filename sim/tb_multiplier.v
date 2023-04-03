@@ -1,6 +1,6 @@
 `timescale 100ps / 1ps
 
-module TestbenchMultiplier32Bit ();
+module TestbenchMultiplier32 ();
 
   reg clk;
   reg mult_begin;
@@ -11,7 +11,7 @@ module TestbenchMultiplier32Bit ();
   wire mult_end;
 
 
-  Multiplier32Bit multiplier_uut (
+  Multiplier32 multiplier_uut (
       .clk(clk),
       .mult_begin(mult_begin),
       .operand1(operand1),
@@ -22,7 +22,7 @@ module TestbenchMultiplier32Bit ();
 
   initial begin
     $dumpfile("sim/wave_multiplier.vcd");
-    $dumpvars(0, TestbenchMultiplier32Bit);
+    $dumpvars(0, TestbenchMultiplier32);
 
     clk = 0;
     mult_begin = 0;
