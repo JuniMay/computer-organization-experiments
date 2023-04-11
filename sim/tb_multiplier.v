@@ -70,4 +70,4 @@ module TestbenchMultiplier32 ();
 
   always #5 clk = ~clk;
 
-endmodule  //TOP
+endmodule

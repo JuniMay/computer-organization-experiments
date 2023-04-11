@@ -1,16 +1,57 @@
+# clock
 set_property PACKAGE_PIN AC19 [get_ports clk]
-set_property PACKAGE_PIN H7   [get_ports led_end]
-set_property PACKAGE_PIN Y3   [get_ports resetn]
-set_property PACKAGE_PIN AC21 [get_ports input_sel]
-set_property PACKAGE_PIN AD24 [get_ports sw_begin]
+
+# reset
+set_property PACKAGE_PIN Y3 [get_ports resetn]
+
+# led output
+set_property PACKAGE_PIN H7 [get_ports led_wen_0]
+set_property PACKAGE_PIN D5 [get_ports led_wen_1]
+set_property PACKAGE_PIN A3 [get_ports led_wen_2]
+set_property PACKAGE_PIN A5 [get_ports led_wen_3]
+
+set_property PACKAGE_PIN A4 [get_ports led_ren_0]
+set_property PACKAGE_PIN F7 [get_ports led_ren_1]
+
+set_property PACKAGE_PIN G8 [get_ports led_waddr]
+set_property PACKAGE_PIN H8 [get_ports led_wdata]
+set_property PACKAGE_PIN J8 [get_ports led_raddr1]
+set_property PACKAGE_PIN J23 [get_ports led_raddr2]
+
+# switches
+set_property PACKAGE_PIN AC21 [get_ports input_sel[1]]
+set_property PACKAGE_PIN AD24 [get_ports input_sel[0]]
+
+set_property PACKAGE_PIN AC22 [get_ports wen[3]]
+set_property PACKAGE_PIN AC23 [get_ports wen[2]]
+set_property PACKAGE_PIN AB6 [get_ports wen[1]]
+set_property PACKAGE_PIN W6 [get_ports wen[0]]
+
+set_property PACKAGE_PIN AA7 [get_ports ren[1]]
+set_property PACKAGE_PIN Y6 [get_ports ren[0]]
 
 set_property IOSTANDARD LVCMOS33 [get_ports clk]
-set_property IOSTANDARD LVCMOS33 [get_ports led_end]
 set_property IOSTANDARD LVCMOS33 [get_ports resetn]
-set_property IOSTANDARD LVCMOS33 [get_ports input_sel]
-set_property IOSTANDARD LVCMOS33 [get_ports sw_begin]
+set_property IOSTANDARD LVCMOS33 [get_ports led_wen_0]
+set_property IOSTANDARD LVCMOS33 [get_ports led_wen_1]
+set_property IOSTANDARD LVCMOS33 [get_ports led_wen_2]
+set_property IOSTANDARD LVCMOS33 [get_ports led_wen_3]
+set_property IOSTANDARD LVCMOS33 [get_ports led_ren_0]
+set_property IOSTANDARD LVCMOS33 [get_ports led_ren_1]
+set_property IOSTANDARD LVCMOS33 [get_ports led_raddr1]
+set_property IOSTANDARD LVCMOS33 [get_ports led_raddr2]
+set_property IOSTANDARD LVCMOS33 [get_ports led_waddr]
+set_property IOSTANDARD LVCMOS33 [get_ports led_wdata]
+set_property IOSTANDARD LVCMOS33 [get_ports wen[3]]
+set_property IOSTANDARD LVCMOS33 [get_ports wen[2]]
+set_property IOSTANDARD LVCMOS33 [get_ports wen[1]]
+set_property IOSTANDARD LVCMOS33 [get_ports wen[0]]
+set_property IOSTANDARD LVCMOS33 [get_ports ren[1]]
+set_property IOSTANDARD LVCMOS33 [get_ports ren[0]]
+set_property IOSTANDARD LVCMOS33 [get_ports input_sel[1]]
+set_property IOSTANDARD LVCMOS33 [get_ports input_sel[0]]
 
-# lcd ports
+# lcd
 set_property PACKAGE_PIN J25 [get_ports lcd_rst]
 set_property PACKAGE_PIN H18 [get_ports lcd_cs]
 set_property PACKAGE_PIN K16 [get_ports lcd_rs]
@@ -64,4 +105,3 @@ set_property IOSTANDARD LVCMOS33 [get_ports ct_int]
 set_property IOSTANDARD LVCMOS33 [get_ports ct_sda]
 set_property IOSTANDARD LVCMOS33 [get_ports ct_scl]
 set_property IOSTANDARD LVCMOS33 [get_ports ct_rstn]
-
