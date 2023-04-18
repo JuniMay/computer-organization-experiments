@@ -5,13 +5,13 @@ set_property PACKAGE_PIN AC19 [get_ports clk]
 set_property PACKAGE_PIN Y3 [get_ports resetn]
 
 # led output
-set_property PACKAGE_PIN H7 [get_ports led_wen_0]
-set_property PACKAGE_PIN D5 [get_ports led_wen_1]
-set_property PACKAGE_PIN A3 [get_ports led_wen_2]
-set_property PACKAGE_PIN A5 [get_ports led_wen_3]
+set_property PACKAGE_PIN H7 [get_ports led_wen_3]
+set_property PACKAGE_PIN D5 [get_ports led_wen_2]
+set_property PACKAGE_PIN A3 [get_ports led_wen_1]
+set_property PACKAGE_PIN A5 [get_ports led_wen_0]
 
-set_property PACKAGE_PIN A4 [get_ports led_ren_0]
-set_property PACKAGE_PIN F7 [get_ports led_ren_1]
+set_property PACKAGE_PIN A4 [get_ports led_ren_1]
+set_property PACKAGE_PIN F7 [get_ports led_ren_0]
 
 set_property PACKAGE_PIN G8 [get_ports led_waddr]
 set_property PACKAGE_PIN H8 [get_ports led_wdata]

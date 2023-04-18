@@ -3,7 +3,7 @@ module RegisterFile (
     // clock
     input clk,
     // write enable
-    input [4:0] wen,
+    input [3:0] wen,
 
     // read enable
     input [1:0] ren,

@@ -7,3 +7,4 @@ reports
 !.vscode/property.json
 
 *.vcd
+.DS_Store
