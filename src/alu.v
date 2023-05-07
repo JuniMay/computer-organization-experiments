@@ -34,8 +34,8 @@ module Alu(
   assign alu_lui = (control == 4'b1100) ? 1'b1 : 1'b0;
 
   assign alu_xnor = (control == 4'b1101) ? 1'b1 : 1'b0;
-  assign alu_inc = (control = 4'b1110) ? 1'b1 : 1'b0;
-  assign alu_lh = (control = 4'b1111) ? 1'b1 : 1'b0;
+  assign alu_inc = (control == 4'b1110) ? 1'b1 : 1'b0;
+  assign alu_lh = (control == 4'b1111) ? 1'b1 : 1'b0;
 
   wire [31:0] add_sub_result;
   wire [31:0] slt_result;
