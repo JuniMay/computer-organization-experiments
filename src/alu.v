@@ -33,6 +33,10 @@ module Alu(
   assign alu_sra = (control == 4'b1011) ? 1'b1 : 1'b0;
   assign alu_lui = (control == 4'b1100) ? 1'b1 : 1'b0;
 
+  assign alu_xnor = (control == 4'b1101) ? 1'b1 : 1'b0;
+  assign alu_inc = (control = 4'b1110) ? 1'b1 : 1'b0;
+  assign alu_lh = (control = 4'b1111) ? 1'b1 : 1'b0;
+
   wire [31:0] add_sub_result;
   wire [31:0] slt_result;
   wire [31:0] sltu_result;
@@ -45,11 +49,18 @@ module Alu(
   wire [31:0] sra_result;
   wire [31:0] lui_result;
 
+  wire [31:0] xnor_result;
+  wire [31:0] inc_result;
+  wire [31:0] lh_result;
+
   assign and_result = src1 & src2;
   assign or_result = src1 | src2;
   assign nor_result = ~or_result;
   assign xor_result = src1 ^ src2;
   assign lui_result = {src2[15:0], 16'd0};
+
+  assign xnor_result = ~xor_result;
+  assign lh_result = {16'd0, src2[15:0]};
 
   wire [31:0] adder_operand1;
   wire [31:0] adder_operand2;
@@ -58,7 +69,7 @@ module Alu(
   wire adder_carry_out;
 
   assign adder_operand1 = src1;
-  assign adder_operand2 = alu_add ? src2 : ~src2;
+  assign adder_operand2 = alu_inc ? 32'd1 : (alu_add ? src2 : ~src2);
   assign adder_carry_in = ~alu_add; // for substraction.
 
   Adder32 adder(
@@ -70,6 +81,7 @@ module Alu(
           );
 
   assign add_sub_result = adder_result;
+  assign inc_result = adder_result;
 
   assign slt_result[31:1] = 31'd0;
   assign slt_result[0] = (src1[31] & ~src2[31]) | (~(src1[31] ^ src2[31]) & adder_result[31]);
@@ -139,6 +151,9 @@ module Alu(
          alu_srl ? srl_result :
          alu_sra ? sra_result :
          alu_lui ? lui_result :
+         alu_xnor ? xnor_result :
+         alu_inc ? inc_result :
+         alu_lh ? lh_result :
          32'd0;
 
 endmodule

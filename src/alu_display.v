@@ -1,5 +1,5 @@
 
-module RegisterFileDisplay (
+module AluDisplay (
     input clk,
     input resetn,
 
