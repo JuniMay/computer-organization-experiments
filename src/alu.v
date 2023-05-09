@@ -70,7 +70,7 @@ module Alu(
 
   assign adder_operand1 = src1;
   assign adder_operand2 = alu_inc ? 32'd1 : (alu_add ? src2 : ~src2);
-  assign adder_carry_in = ~alu_add; // for substraction.
+  assign adder_carry_in = alu_inc ? 1'b0 : ~alu_add; // for substraction.
 
   Adder32 adder(
             .operand1(adder_operand1),
