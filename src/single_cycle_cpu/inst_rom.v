@@ -11,7 +11,7 @@ module inst_rom(
     output reg [31:0] inst       // 指令
     );
 
-    wire [31:0] inst_rom[19:0];  // 指令存储器，字节地址7'b000_0000~7'b111_1111
+    wire [31:0] inst_rom[21:0];  // 指令存储器，字节地址7'b000_0000~7'b111_1111
     //------------- 指令编码 ---------|指令地址|--- 汇编指令 -----|- 指令结果 -----//
     assign inst_rom[ 0] = 32'h24010001; // 00H: addiu $1 ,$0,#1   | $1 = 0000_0001H
     assign inst_rom[ 1] = 32'h00011100; // 04H: sll   $2 ,$1,#4   | $2 = 0000_0010H
@@ -32,7 +32,12 @@ module inst_rom(
     assign inst_rom[16] = 32'hAC0B001C; // 40H: sw    $11,#28($0) | Men[0000_001CH] = 0000_0000H
     assign inst_rom[17] = 32'hAC040010; // 44H: sw    $4 ,#16($0) | Mem[0000_0010H] = 0000_0004H
     assign inst_rom[18] = 32'h3C0C000C; // 48H: lui   $12,#12     | [R12] = 000C_0000H
-    assign inst_rom[19] = 32'h08000000; // 4CH: j     00H         | 跳转指令00H
+    // assign inst_rom[19] = 32'h08000000; // 4CH: j     00H         | 跳转指令00H
+   
+    assign inst_rom[19] = 32'h00066903; // 50H: sra $13,$6,#4        | $13 = FFFF_FFFEH
+    assign inst_rom[20] = 32'h31AE000F; // 54H: andi $14,$13,#0x000F | $14 = 0000_000EH
+    assign inst_rom[21] = 32'h08000000; // 58H: j     00H            | 跳转指令00H
+
 
     //读指令,取4字节
     always @(*)
@@ -58,6 +63,9 @@ module inst_rom(
             5'd17: inst <= inst_rom[17];
             5'd18: inst <= inst_rom[18];
             5'd19: inst <= inst_rom[19];
+            5'd20: inst <= inst_rom[20];
+            5'd21: inst <= inst_rom[21];
+            // 5'd22: inst <= inst_rom[22];
             default: inst <= 32'd0;
         endcase
     end

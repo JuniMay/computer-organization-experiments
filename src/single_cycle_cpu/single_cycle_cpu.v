@@ -84,6 +84,7 @@ module single_cycle_cpu(
     wire inst_NOR , inst_OR   , inst_XOR, inst_SLL;
     wire inst_SRL , inst_ADDIU, inst_BEQ, inst_BNE;
     wire inst_LW  , inst_SW   , inst_LUI, inst_J;
+    wire inst_SRA , inst_ANDI;
 
     assign inst_ADDU  = op_zero & sa_zero    & (funct == 6'b100001);// 无符号加法
     assign inst_SUBU  = op_zero & sa_zero    & (funct == 6'b100011);// 无符号减法
@@ -94,7 +95,10 @@ module single_cycle_cpu(
     assign inst_XOR   = op_zero & sa_zero    & (funct == 6'b100110);// 逻辑异或运算
     assign inst_SLL   = op_zero & (rs==5'd0) & (funct == 6'b000000);// 逻辑左移
     assign inst_SRL   = op_zero & (rs==5'd0) & (funct == 6'b000010);// 逻辑右移
+    assign inst_SRA   = op_zero & (rs==5'd0) & (funct == 6'b000011);// 算术右移
+
     assign inst_ADDIU = (op == 6'b001001);                  // 立即数无符号加法
+    assign inst_ANDI  = (op == 6'b001100);                  // 立即数逻辑与运算
     assign inst_BEQ   = (op == 6'b000100);                  // 判断相等跳转
     assign inst_BNE   = (op == 6'b000101);                  // 判断不等跳转
     assign inst_LW    = (op == 6'b100011);                  // 从内存装载
@@ -154,21 +158,21 @@ module single_cycle_cpu(
     assign inst_sub = inst_SUBU; // 减法
     assign inst_slt = inst_SLT;  // 小于置位
     assign inst_sltu= 1'b0;      // 暂未实现
-    assign inst_and = inst_AND;  // 逻辑与
+    assign inst_and = inst_AND | inst_ANDI;  // 逻辑与
     assign inst_nor = inst_NOR;  // 逻辑或非
     assign inst_or  = inst_OR;   // 逻辑或
     assign inst_xor = inst_XOR;  // 逻辑异或
     assign inst_sll = inst_SLL;  // 逻辑左移
     assign inst_srl = inst_SRL;  // 逻辑右移
-    assign inst_sra = 1'b0;      // 暂未实现
+    assign inst_sra = inst_SRA;  // 算数右移
     assign inst_lui = inst_LUI;  // 立即数装载高位
 
     wire [31:0] sext_imm;
     wire   inst_shf_sa;    //使用sa域作为偏移量的指令
     wire   inst_imm_sign;  //对立即数作符号扩展的指令
     assign sext_imm      = {{16{imm[15]}}, imm};// 立即数符号扩展
-    assign inst_shf_sa   = inst_SLL | inst_SRL;
-    assign inst_imm_sign = inst_ADDIU | inst_LUI | inst_LW | inst_SW;
+    assign inst_shf_sa   = inst_SLL | inst_SRL | inst_SRA;
+    assign inst_imm_sign = inst_ADDIU | inst_LUI | inst_LW | inst_SW | inst_ANDI;
     
     wire [31:0] alu_operand1;
     wire [31:0] alu_operand2;
@@ -224,9 +228,9 @@ module single_cycle_cpu(
 //---------------------------------{写回}begin------------------------------------//
     wire inst_wdest_rt;   // 寄存器堆写入地址为rt的指令
     wire inst_wdest_rd;   // 寄存器堆写入地址为rd的指令
-    assign inst_wdest_rt = inst_ADDIU | inst_LW | inst_LUI;
+    assign inst_wdest_rt = inst_ADDIU | inst_LW | inst_LUI | inst_ANDI;
     assign inst_wdest_rd = inst_ADDU | inst_SUBU | inst_SLT | inst_AND | inst_NOR
-                          | inst_OR   | inst_XOR  | inst_SLL | inst_SRL;                   
+                          | inst_OR   | inst_XOR  | inst_SLL | inst_SRL | inst_SRA;                   
     // 寄存器堆写使能信号，非复位状态下有效
     assign rf_wen   = (inst_wdest_rt | inst_wdest_rd) & resetn;
     assign rf_waddr = inst_wdest_rd ? rd : rt;        // 寄存器堆写地址rd或rt
